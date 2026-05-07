@@ -1,0 +1,10 @@
+G:\Chico\0Cotuca\anos letivos\2026\disciplinas\ED\Projetos\Hashing Cidades em Marte\apCaminhosEmMarte\obj\Debug\apCaminhosEmMarte.csproj.AssemblyReference.cache
+G:\Chico\0Cotuca\anos letivos\2026\disciplinas\ED\Projetos\Hashing Cidades em Marte\apCaminhosEmMarte\obj\Debug\apCaminhosEmMarte.FrmCaminhos.resources
+G:\Chico\0Cotuca\anos letivos\2026\disciplinas\ED\Projetos\Hashing Cidades em Marte\apCaminhosEmMarte\obj\Debug\apCaminhosEmMarte.Properties.Resources.resources
+G:\Chico\0Cotuca\anos letivos\2026\disciplinas\ED\Projetos\Hashing Cidades em Marte\apCaminhosEmMarte\obj\Debug\apCaminhosEmMarte.csproj.GenerateResource.cache
+G:\Chico\0Cotuca\anos letivos\2026\disciplinas\ED\Projetos\Hashing Cidades em Marte\apCaminhosEmMarte\obj\Debug\apCaminhosEmMarte.csproj.CoreCompileInputs.cache
+G:\Chico\0Cotuca\anos letivos\2026\disciplinas\ED\Projetos\Hashing Cidades em Marte\apCaminhosEmMarte\bin\Debug\apCaminhosEmMarte.exe.config
+G:\Chico\0Cotuca\anos letivos\2026\disciplinas\ED\Projetos\Hashing Cidades em Marte\apCaminhosEmMarte\bin\Debug\apCaminhosEmMarte.exe
+G:\Chico\0Cotuca\anos letivos\2026\disciplinas\ED\Projetos\Hashing Cidades em Marte\apCaminhosEmMarte\bin\Debug\apCaminhosEmMarte.pdb
+G:\Chico\0Cotuca\anos letivos\2026\disciplinas\ED\Projetos\Hashing Cidades em Marte\apCaminhosEmMarte\obj\Debug\apCaminhosEmMarte.exe
+G:\Chico\0Cotuca\anos letivos\2026\disciplinas\ED\Projetos\Hashing Cidades em Marte\apCaminhosEmMarte\obj\Debug\apCaminhosEmMarte.pdb

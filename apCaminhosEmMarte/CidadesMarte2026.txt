@@ -1,0 +1,23 @@
+Acheron;        0,11353;0,28857
+Arena;          0,68726;0,29248
+Arrakeen;       0,05298;0,48682
+Bakhuysen;      0,67456;0,52002 
+Bradbury;       0,40747;0,74365
+Burroughs;      0,71265;0,37939 
+Cairo;          0,21606;0,51025
+Dumont;         0,55737;0,48096
+Echus Overlook; 0,24194;0,35498
+Esperança;      0,78906;0,52588
+Gondor;         0,93311;0,58545
+Lakefront;      0,69336;0,63818  
+Lowell;         0,89453;0,38428 
+Moria;          0,90039;0,70947
+Nicosia;        0,16235;0,50732
+Odessa;         0,63306;0,67529
+Perseverança;   0,66528;0,81787
+Rowan;          0,56567;0,66553
+Senzeni Na;     0,18921;0,66260
+Sheffield;      0,15894;0,45849
+Temperança;     0,51343;0,67822
+Tharsis;        0,12964;0,39502
+Underhill;      0,37891;0,51318
