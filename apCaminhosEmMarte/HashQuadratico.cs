@@ -1,37 +1,103 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class HashQuadratico<T> : IHashing<T>
-  where T : IComparable<T>, IRegistro<T>, new()
+public class HashQuadratico<T> : IHashing<T> where T : IComparable<T>, IRegistro<T>, new()
 {
-  public List<T> Conteudo()
-  {
-    throw new NotImplementedException();
-  }
 
-  public List<string> LocaisDosDados()
-  {
-    throw new NotImplementedException();
-  }
+    private T[] tabelaDeHash;
+    private int tamanhoPadrao = 10007;
+    private int quantidade;
 
-  public bool Existe(T item, out int onde)
-  {
-    throw new NotImplementedException();
-  }
+    public HashQuadratico()
+    {
+        tabelaDeHash = new T[tamanhoPadrao];
+        quantidade = 0;
+    }
 
-  private int Hash(string chave)
-  {
-    throw new NotImplementedException();
-  }
+    private int Hash(string chave)
+    {
+        long tot = 0;
+        for (int i = 0; i < chave.Length; i++)
+            tot = 37 * tot + (int)chave[i];
 
-  public bool Incluiu(T item)
-  {
-    throw new NotImplementedException();
-  }
+        tot = tot % tamanhoPadrao;
+        if (tot < 0) tot += tamanhoPadrao;
+        return (int)tot;
+    }
 
-  public bool Excluiu(T item)
-  {
-    throw new NotImplementedException();
-  }
+    public bool Incluiu(T novoDado)
+    {
+        if (quantidade >= tamanhoPadrao / 2)
+            return false;
+
+        int indice = Hash(novoDado.Chave);
+        int tentativa = 0;
+        int posicaoAtual = indice;
+
+        while (tabelaDeHash[posicaoAtual] != null)
+        {
+            if (tabelaDeHash[posicaoAtual].Chave == novoDado.Chave)
+                return false;
+
+            tentativa++;
+            posicaoAtual = (indice + (tentativa * tentativa)) % tamanhoPadrao;
+
+            if (tentativa >= tamanhoPadrao)
+                return false;
+        }
+
+        tabelaDeHash[posicaoAtual] = novoDado;
+        quantidade++;
+        return true;
+    }
+
+    public bool Existe(T item, out int onde)
+    {
+        int indice = Hash(item.Chave);
+        int tentativa = 0;
+        int posicaoAtual = indice;
+
+        while (tabelaDeHash[posicaoAtual] != null && tentativa < tamanhoPadrao)
+        {
+            if (tabelaDeHash[posicaoAtual].Chave == item.Chave)
+            {
+                onde = posicaoAtual;
+                return true;
+            }
+            tentativa++;
+            posicaoAtual = (indice + (tentativa * tentativa)) % tamanhoPadrao;
+        }
+
+        onde = -1;
+        return false;
+    }
+
+    public bool Excluiu(T dado)
+    {
+        if (Existe(dado, out int onde))
+        {
+            tabelaDeHash[onde] = default(T);
+            quantidade--;
+            return true;
+        }
+        return false;
+    }
+
+    public List<string> LocaisDosDados()
+    {
+        var dados = new List<string>();
+        for (int i = 0; i < tabelaDeHash.Length; i++)
+            if (tabelaDeHash[i] != null)
+                dados.Add($"{i,5} : {tabelaDeHash[i]}");
+        return dados;
+    }
+
+    public List<T> Conteudo()
+    {
+        var dados = new List<T>();
+        for (int i = 0; i < tabelaDeHash.Length; i++)
+            if (tabelaDeHash[i] != null)
+                dados.Add(tabelaDeHash[i]);
+        return dados;
+    }
 }
-
