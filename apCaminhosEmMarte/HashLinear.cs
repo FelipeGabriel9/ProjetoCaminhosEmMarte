@@ -53,12 +53,12 @@ public class HashLinear<T> : IHashing<T>
 
     public bool Existe(T item, out int onde)
     {
-        int inicio = Hash(item.Chave);
+        int indice = Hash(item.Chave);
         onde = -1;
 
         for (int i = 0; i < tabelaDeHash.Length; i++)
         {
-            int pos = (inicio + i) % tabelaDeHash.Length;
+            int pos = (indice + i) % tabelaDeHash.Length;
 
             if (tabelaDeHash[pos] == null && !foiExcluido[pos])
                 return false;
