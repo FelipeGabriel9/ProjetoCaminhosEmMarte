@@ -7,11 +7,13 @@ public class HashQuadratico<T> : IHashing<T> where T : IComparable<T>, IRegistro
     private T[] tabelaDeHash;
     private int tamanhoPadrao = 10007;
     private int quantidade;
+    private bool[] FoiExcluido;
 
     public HashQuadratico()
     {
         tabelaDeHash = new T[tamanhoPadrao];
         quantidade = 0;
+        FoiExcluido = new bool[tamanhoPadrao];
     }
 
     private int Hash(string chave)
@@ -34,16 +36,15 @@ public class HashQuadratico<T> : IHashing<T> where T : IComparable<T>, IRegistro
         int tentativa = 0;
         int posicaoAtual = indice;
 
-        while (tabelaDeHash[posicaoAtual] != null)
+        while (tabelaDeHash[posicaoAtual] != null && !FoiExcluido[posicaoAtual])
         {
             if (tabelaDeHash[posicaoAtual].Chave == novoDado.Chave)
                 return false;
 
             tentativa++;
-            posicaoAtual = (indice + (tentativa * tentativa)) % tamanhoPadrao;
-
             if (tentativa >= tamanhoPadrao)
                 return false;
+            posicaoAtual = (indice + (tentativa * tentativa)) % tamanhoPadrao;
         }
 
         tabelaDeHash[posicaoAtual] = novoDado;
@@ -59,15 +60,14 @@ public class HashQuadratico<T> : IHashing<T> where T : IComparable<T>, IRegistro
 
         while (tabelaDeHash[posicaoAtual] != null && tentativa < tamanhoPadrao)
         {
-            if (tabelaDeHash[posicaoAtual].Chave == item.Chave)
+            if (!FoiExcluido[posicaoAtual] && tabelaDeHash[posicaoAtual].Chave == item.Chave)
             {
                 onde = posicaoAtual;
                 return true;
             }
             tentativa++;
-            posicaoAtual = (indice + (tentativa * tentativa)) % tamanhoPadrao;
+            posicaoAtual = (indice + tentativa * tentativa) % tamanhoPadrao;
         }
-
         onde = -1;
         return false;
     }
@@ -76,7 +76,7 @@ public class HashQuadratico<T> : IHashing<T> where T : IComparable<T>, IRegistro
     {
         if (Existe(dado, out int onde))
         {
-            tabelaDeHash[onde] = default(T);
+            FoiExcluido[onde] = true;
             quantidade--;
             return true;
         }
@@ -87,7 +87,7 @@ public class HashQuadratico<T> : IHashing<T> where T : IComparable<T>, IRegistro
     {
         var dados = new List<string>();
         for (int i = 0; i < tabelaDeHash.Length; i++)
-            if (tabelaDeHash[i] != null)
+            if (tabelaDeHash[i] != null && !FoiExcluido[i])
                 dados.Add($"{i,5} : {tabelaDeHash[i]}");
         return dados;
     }
@@ -96,7 +96,7 @@ public class HashQuadratico<T> : IHashing<T> where T : IComparable<T>, IRegistro
     {
         var dados = new List<T>();
         for (int i = 0; i < tabelaDeHash.Length; i++)
-            if (tabelaDeHash[i] != null)
+            if (tabelaDeHash[i] != null && !FoiExcluido[i])
                 dados.Add(tabelaDeHash[i]);
         return dados;
     }
