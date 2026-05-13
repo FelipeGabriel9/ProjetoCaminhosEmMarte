@@ -76,6 +76,7 @@ public class HashQuadratico<T> : IHashing<T> where T : IComparable<T>, IRegistro
     {
         if (Existe(dadoParaExcluir, out int onde))
         {
+            tabelaDeHash[onde] = default;
             FoiExcluido[onde] = true;
             quantidade--;
             return true;
