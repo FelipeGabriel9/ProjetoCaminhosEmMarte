@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Projeto2Ed;
 
 public class HashDuplo<T> : IHashing<T> where T : IRegistro<T>, new()
 {
