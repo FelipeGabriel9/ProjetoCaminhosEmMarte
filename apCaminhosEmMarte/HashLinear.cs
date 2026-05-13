@@ -4,9 +4,10 @@ using System.Collections.Generic;
 public class HashLinear<T> : IHashing<T>
   where T : IComparable<T>, IRegistro<T>, new()
 {
-    private const int tamanhoPadrao = 10007; // número primo
+    private const int tamanhoPadrao = 10007; 
     private T[] tabelaDeHash;
     private bool[] foiExcluido; 
+
 
     public HashLinear(int tamanhoDesejado)
     {
@@ -55,21 +56,21 @@ public class HashLinear<T> : IHashing<T>
         int inicio = Hash(item.Chave);
         onde = -1;
 
-        for (int passo = 0; passo < tabelaDeHash.Length; passo++)
+        for (int i = 0; i < tabelaDeHash.Length; i++)
         {
-            int pos = (inicio + passo) % tabelaDeHash.Length;
+            int pos = (inicio + i) % tabelaDeHash.Length;
 
             if (tabelaDeHash[pos] == null && !foiExcluido[pos])
-                return false; // buraco real — item não existe
+                return false;
 
-            if (!foiExcluido[pos] && tabelaDeHash[pos] != null &&
-                tabelaDeHash[pos].Equals(item))
+            if (tabelaDeHash[pos] != null && tabelaDeHash[pos].Equals(item))
             {
                 onde = pos;
                 return true;
             }
         }
 
+       
         return false;
     }
 
@@ -79,7 +80,7 @@ public class HashLinear<T> : IHashing<T>
         if (!Existe(item, out onde))
             return false;
 
-        // Exclusão lógica (lazy deletion) para não quebrar as cadeias de sondagem
+        tabelaDeHash[onde] = default;
         foiExcluido[onde] = true;
         return true;
     }

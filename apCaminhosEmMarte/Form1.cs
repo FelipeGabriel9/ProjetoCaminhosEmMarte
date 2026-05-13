@@ -48,6 +48,7 @@ namespace apCaminhosEmMarte
           // de acordo com a técnica de hash escolhida
           // pelo usuário
         }
+
         // Desenhar os nomes das cidades no mapa de Marte
         asCidades.Close();  // deixar arquivo fechado
       }
