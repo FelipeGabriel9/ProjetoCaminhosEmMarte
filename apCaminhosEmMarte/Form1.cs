@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -13,7 +12,8 @@ namespace apCaminhosEmMarte
       InitializeComponent();
     }
 
-    IHashing<Cidade> tabelaDeHash;
+    IHashing<Cidade> tabelaDeCidades;
+
     private void Form1_Load(object sender, EventArgs e)
     {
 
@@ -27,15 +27,16 @@ namespace apCaminhosEmMarte
         // pelo usuário e criamos uma tabela de hash de
         // acordo com essa escolha
         if (rbBucketHash.Checked) 
-          tabelaDeHash = new BucketHash<Cidade>();
+          tabelaDeCidades = new BucketHash<Cidade>();
+
+        else if (rbSondagemLinear.Checked)
+          tabelaDeCidades = new HashLinear<Cidade>();
+
+        else if (rbSondagemQuadratica.Checked)
+           tabelaDeCidades = new HashQuadratico<Cidade>();
+
         else
-          if (rbSondagemLinear.Checked)
-             tabelaDeHash = new HashLinear<Cidade>();
-          else
-            if (rbSondagemQuadratica.Checked)
-               tabelaDeHash = new HashQuadratico<Cidade>();
-            else
-              tabelaDeHash = new HashDuplo<Cidade>();
+          tabelaDeCidades = new HashDuplo<Cidade>();
 
         // abrimos o arquivo escolhido
         var asCidades = new StreamReader(dlgAbrir.FileName);
@@ -47,8 +48,12 @@ namespace apCaminhosEmMarte
           // armazenar esse objeto na tabela de Hash
           // de acordo com a técnica de hash escolhida
           // pelo usuário
-        }
+            Cidade umaCidade = new Cidade().LerRegistro(asCidades);
+            if (umaCidade != null)
+                tabelaDeCidades.Incluiu(umaCidade);
 
+        }
+        pbMapa.Invalidate();
         // Desenhar os nomes das cidades no mapa de Marte
         asCidades.Close();  // deixar arquivo fechado
       }
@@ -60,5 +65,80 @@ namespace apCaminhosEmMarte
       // registros armazenados devem ser gravados no arquivo
       // agora, aberto para saída (StreamWriter).
     }
-  }
+
+        private void pbMapa_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            if (tabelaDeCidades != null)
+
+            {
+                var listaCidades = tabelaDeCidades.Conteudo();
+                foreach (var cidade in listaCidades)
+                {
+                    // Se as coordenadas no arquivo forem de 0 a 1:
+                    int xPixel = (int)(cidade.X * pbMapa.Width);
+                    int yPixel = (int)(cidade.Y * pbMapa.Height);
+
+                    g.FillEllipse(Brushes.Red, xPixel - 3, yPixel - 3, 6, 6);
+
+                    g.DrawString(cidade.Chave, this.Font, Brushes.Black, xPixel - 10, yPixel + 5);
+                }
+            }
+        }
+
+        private void btnInserir_Click(object sender, EventArgs e)
+        {
+            string nome = txtNome.Text.Trim();
+            double x = (double)udX.Value; 
+            double y = (double)udY.Value;
+
+            if (!string.IsNullOrEmpty(nome))
+            {
+
+                var novaCidade = new Cidade(nome, x, y);
+
+                if (tabelaDeCidades.Incluiu(novaCidade))
+                {
+                    pbMapa.Invalidate();
+                    MessageBox.Show("Incluido com sucesso!");
+                }
+
+                MessageBox.Show("Erro ao incluir!");
+            }
+
+            MessageBox.Show("Digite um nome para a cidade!");
+        }
+
+        private void btnRemover_Click(object sender, EventArgs e)
+        {
+            string nomeParaExcluir = txtNome.Text.Trim();
+            var cidadeExcluida = new Cidade(nomeParaExcluir, 0, 0);
+
+            if (tabelaDeCidades.Excluiu(cidadeExcluida))
+            {
+                pbMapa.Invalidate(); 
+                MessageBox.Show("Cidade excluída com sucesso!");
+            }
+            else
+                MessageBox.Show("Cidade não encontrada!");
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            string nomeProcurado = txtNome.Text.Trim();
+            var cidadeProcurada = new Cidade(nomeProcurado, 0, 0);
+
+            if (tabelaDeCidades.Existe(cidadeProcurada, out int onde))
+            {
+                var cidadeAchada = tabelaDeCidades.Conteudo().Find(c => c.Chave == nomeProcurado);
+
+                udX.Value = (decimal)cidadeAchada.X;
+                udY.Value = (decimal)cidadeAchada.Y;
+
+                MessageBox.Show("Busca realizada com sucesso! ");
+            }
+            else
+                MessageBox.Show("Erro ao buscar cidade!");
+        }
+    }
 }

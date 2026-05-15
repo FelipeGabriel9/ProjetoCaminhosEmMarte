@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Cryptography.X509Certificates;
 
 namespace apCaminhosEmMarte
 {
@@ -8,18 +9,27 @@ namespace apCaminhosEmMarte
                         IComparable<Cidade>
   {
     // atributos que formam uma linha do arquivo de cidades
-    string nome;
-    double x, y;
+    private string nome;
+    private double x;
+    private double y;
 
     public Cidade() { }  // construtor default
+
+    public Cidade(string nome, double x, double y)
+        {
+            this.nome = nome;
+            this.x = x;
+            this.y = y;
+        }
     public Cidade LerRegistro(StreamReader arquivo)
     {
       if (arquivo != null)  // está aberto
       {
         string linha = arquivo.ReadLine(); // lê uma linha
-        nome = linha.Substring(0, 15);  // (inicio, quantos)
-        x = double.Parse(linha.Substring(15, 7));
-        y = double.Parse(linha.Substring(22, 7));
+        string[] dados = linha.Split(';');
+        nome = dados[0];  // (inicio, quantos)
+        x = double.Parse(dados[1]);
+        y = double.Parse(dados[2]);
         return this;
       }
       return default(Cidade);  // para arquivo não aberto
@@ -36,6 +46,9 @@ namespace apCaminhosEmMarte
       return this.nome.CompareTo(outra.nome);
     }
     public string Chave => this.nome;
+
+    public double X => this.x;
+    public double Y => this.y;
 
     public bool Equals(Cidade outra)
     {

@@ -21,3 +21,4 @@ Sheffield;      0,15894;0,45849
 Temperança;     0,51343;0,67822
 Tharsis;        0,12964;0,39502
 Underhill;      0,37891;0,51318
+Devlandia;      0,12321;0,12321
