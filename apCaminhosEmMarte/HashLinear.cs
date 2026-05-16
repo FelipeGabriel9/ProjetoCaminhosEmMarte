@@ -6,7 +6,7 @@ public class HashLinear<T> : IHashing<T>
   where T : IComparable<T>, IRegistro<T>, new()
 {
     
-    private const int tamanhoPadrao = 97; // Tamanho inicial padrão da tabela (um número primo ideal
+    private const int tamanhoPadrao = 97; // Tamanho inicial padrão da tabela 
     private T[] tabelaDeHash;             // Vetor que armazena os dados na memória
     private bool[] foiExcluido;           // Vetor booleano para marcar posições onde dados foram deletados, usado para evitar a quebra na busca
     private int quantidade;               //tamanho lógico
