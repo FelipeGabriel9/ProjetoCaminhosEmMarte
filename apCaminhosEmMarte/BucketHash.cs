@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class BucketHash<T> : IHashing<T>
              where T : IRegistro<T>, IEquatable<T>, new()
 {
-    private const int SIZE = 10007;
+    private const int SIZE = 97;
     ArrayList[] dados;
 
     public BucketHash()
