@@ -88,57 +88,87 @@ namespace apCaminhosEmMarte
 
         private void btnInserir_Click(object sender, EventArgs e)
         {
-            string nome = txtNome.Text.Trim();
-            double x = (double)udX.Value; 
-            double y = (double)udY.Value;
-
-            if (!string.IsNullOrEmpty(nome))
+            if (tabelaDeCidades == null)
             {
-
-                var novaCidade = new Cidade(nome, x, y);
-
-                if (tabelaDeCidades.Incluiu(novaCidade))
-                {
-                    pbMapa.Invalidate();
-                    MessageBox.Show("Incluido com sucesso!");
-                }
-
-                MessageBox.Show("Erro ao incluir!");
+                MessageBox.Show("Abra o arquivo primeiro!");
+                return;
             }
+            else
+            {
+                string nome = txtNome.Text.Trim();
+                double x = (double)udX.Value;
+                double y = (double)udY.Value;
 
-            MessageBox.Show("Digite um nome para a cidade!");
+                if (string.IsNullOrEmpty(nome))
+                {
+                    MessageBox.Show("Digite um nome para a cidade!");
+                }
+                else
+                {
+
+                    var novaCidade = new Cidade(nome, x, y);
+
+                    if (tabelaDeCidades.Incluiu(novaCidade))
+                    {
+                        pbMapa.Invalidate();
+                        MessageBox.Show("Incluido com sucesso!");
+                    }
+                    else
+                    {
+                        pbMapa.Invalidate();
+                        MessageBox.Show("Erro ao incluir!");
+                    }
+                }
+            }
         }
 
         private void btnRemover_Click(object sender, EventArgs e)
         {
-            string nomeParaExcluir = txtNome.Text.Trim();
-            var cidadeExcluida = new Cidade(nomeParaExcluir, 0, 0);
-
-            if (tabelaDeCidades.Excluiu(cidadeExcluida))
+            if (tabelaDeCidades == null)
             {
-                pbMapa.Invalidate(); 
+                MessageBox.Show("Abra o arquivo primeiro!");
+                return;
+            }
+            var cidadeAExcluir = new Cidade(txtNome.Text.Trim(), 0, 0);
+
+            if (tabelaDeCidades.Excluiu(cidadeAExcluir))
+            {
+                pbMapa.Invalidate();
                 MessageBox.Show("Cidade excluída com sucesso!");
             }
             else
+            {
                 MessageBox.Show("Cidade não encontrada!");
+            }
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            string nomeProcurado = txtNome.Text.Trim();
-            var cidadeProcurada = new Cidade(nomeProcurado, 0, 0);
+            if (txtNome.Text == "")
+            {
+                MessageBox.Show("Preencha o nome da cidade!");
+                txtNome.Focus();
+                pbMapa.Invalidate();
+            }
+
+            var cidadeProcurada = new Cidade(txtNome.Text.Trim(), 0, 0);
 
             if (tabelaDeCidades.Existe(cidadeProcurada, out int onde))
             {
-                var cidadeAchada = tabelaDeCidades.Conteudo().Find(c => c.Chave == nomeProcurado);
+                var cidadeEncontrada = tabelaDeCidades.Conteudo().Find(c => c.Chave == cidadeProcurada.Chave);
 
-                udX.Value = (decimal)cidadeAchada.X;
-                udY.Value = (decimal)cidadeAchada.Y;
+                udX.Value = (decimal)cidadeEncontrada.X;
+                udY.Value = (decimal)cidadeEncontrada.Y;
+
+                pbMapa.Invalidate();
 
                 MessageBox.Show("Busca realizada com sucesso! ");
             }
             else
+            {
+                pbMapa.Invalidate();
                 MessageBox.Show("Erro ao buscar cidade!");
+            }
         }
     }
 }
