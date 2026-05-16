@@ -12,3 +12,43 @@
 /apCaminhosEmMarte/.vs/apCaminhosEmMarte/v18/DocumentLayout.backup.json
 /apCaminhosEmMarte/.vs/apCaminhosEmMarte/v18/DocumentLayout.json
 /apCaminhosEmMarte/.vs/apCaminhosEmMarte/v18/.suo
+
+# Pastas temporárias do Visual Studio
+.vs/
+bin/
+obj/
+
+# Arquivos de usuário
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Configurações temporárias
+*.cache
+*.log
+
+# Rider / ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# Arquivos temporários do Windows
+Thumbs.db
+Desktop.ini
+
+# Pacotes
+packages/
+
+# Arquivos de teste/local
+TestResults/
+
+# Banco local
+*.mdf
+*.ldf
+
+# Publicação
+publish/
+
+# Arquivos temporários diversos
+*.tmp
+*.temp

@@ -26,20 +26,25 @@ namespace apCaminhosEmMarte
       if (arquivo != null)  // está aberto
       {
         string linha = arquivo.ReadLine(); // lê uma linha
+        if (string.IsNullOrWhiteSpace(linha))
+              return null;
         string[] dados = linha.Split(';');
-        nome = dados[0];  // (inicio, quantos)
+        if (dados.Length < 3)
+                    return null;
+                nome = dados[0];  // (inicio, quantos)
         x = double.Parse(dados[1]);
         y = double.Parse(dados[2]);
+
         return this;
       }
-      return default(Cidade);  // para arquivo não aberto
+            return null;
     }
     public void EscreverRegistro(StreamWriter arquivo)
     {
       if (arquivo != null)
       {
-        arquivo.WriteLine($"{nome}{x:0.00000}{y:0.00000}");
-      }
+                arquivo.WriteLine($"{nome};{x:0.00000};{y:0.00000}");
+            }
     }
     public int CompareTo(Cidade outra)  // <0, ==0, >0
     {
