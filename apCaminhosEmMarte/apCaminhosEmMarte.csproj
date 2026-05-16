@@ -48,11 +48,11 @@
   <ItemGroup>
     <Compile Include="BucketHash.cs" />
     <Compile Include="Cidade.cs" />
-    <Compile Include="FrmCaminhos.cs">
+    <Compile Include="FrmCidade.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmCaminhos.Designer.cs">
-      <DependentUpon>FrmCaminhos.cs</DependentUpon>
+    <Compile Include="FrmCidade.Designer.cs">
+      <DependentUpon>FrmCidade.cs</DependentUpon>
     </Compile>
     <Compile Include="HashDuplo.cs" />
     <Compile Include="HashLinear.cs" />
@@ -61,8 +61,8 @@
     <Compile Include="IRegistro.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FrmCaminhos.resx">
-      <DependentUpon>FrmCaminhos.cs</DependentUpon>
+    <EmbeddedResource Include="FrmCidade.resx">
+      <DependentUpon>FrmCidade.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -38,7 +38,7 @@ namespace apCaminhosEmMarte
     {
       if (arquivo != null)
       {
-        arquivo.WriteLine($"{nome}{x:0.00000}{y:0.00000}");
+        arquivo.WriteLine($"{nome};{x:0.00000};{y:0.00000}");
       }
     }
     public int CompareTo(Cidade outra)  // <0, ==0, >0

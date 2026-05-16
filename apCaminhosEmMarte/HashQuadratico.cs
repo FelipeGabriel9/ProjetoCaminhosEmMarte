@@ -5,7 +5,7 @@ public class HashQuadratico<T> : IHashing<T> where T : IComparable<T>, IRegistro
 {
 
     private T[] tabelaDeHash;
-    private int tamanhoPadrao = 10007;
+    private int tamanhoPadrao = 21;
     private int quantidade;
     private bool[] FoiExcluido;
 
