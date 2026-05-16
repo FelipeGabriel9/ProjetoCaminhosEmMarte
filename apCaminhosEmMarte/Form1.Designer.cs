@@ -1,6 +1,6 @@
 ﻿namespace apCaminhosEmMarte
 {
-  partial class FrmCaminhos
+  partial class FrmCidade
   {
     /// <summary>
     /// Variável de designer necessária.
@@ -28,7 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCaminhos));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCidade));
             this.dlgAbrir = new System.Windows.Forms.OpenFileDialog();
             this.tbControle = new System.Windows.Forms.TabControl();
             this.tpCidades = new System.Windows.Forms.TabPage();
@@ -289,16 +289,15 @@
             this.tpCaminhos.Text = "Caminhos";
             this.tpCaminhos.UseVisualStyleBackColor = true;
             // 
-            // FrmCaminhos
+            // FrmCidade
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(781, 457);
             this.Controls.Add(this.tbControle);
-            this.Name = "FrmCaminhos";
+            this.Name = "FrmCidade";
             this.Text = "Caminhos Em Marte";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmCaminhos_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.tbControle.ResumeLayout(false);
             this.tpCidades.ResumeLayout(false);
             this.tpCidades.PerformLayout();
