@@ -23,39 +23,27 @@ namespace apCaminhosEmMarte
         }
     public Cidade LerRegistro(StreamReader arquivo)
     {
-      if (arquivo != null)  // está aberto
-      {
-        string linha = arquivo.ReadLine(); // lê uma linha
-        if (string.IsNullOrWhiteSpace(linha))
-              return null;
-        string[] dados = linha.Split(';');
-        if (dados.Length < 3)
-                    return null;
-                nome = dados[0];  // (inicio, quantos)
-        x = double.Parse(dados[1]);
-        y = double.Parse(dados[2]);
-<<<<<<< HEAD
-
-        return this;
-      }
-            return null;
-=======
-                return new Cidade(nome, x, y);
-            }
-      return default(Cidade);  // para arquivo não aberto
->>>>>>> 7f4fbe3a4feb140533a1c4d1b590c263c7ccca11
+        if (arquivo != null)  // está aberto
+        {
+            string linha = arquivo.ReadLine(); // lê uma linha
+            if (string.IsNullOrWhiteSpace(linha))
+                return null;
+            string[] dados = linha.Split(';');
+            if (dados.Length < 3)
+                return null;
+            nome = dados[0];  // (inicio, quantos)
+            x = double.Parse(dados[1]);
+            y = double.Parse(dados[2]);
+            return new Cidade(nome, x, y);
+        }      
+        return default(Cidade);  // para arquivo não aberto
     }
     public void EscreverRegistro(StreamWriter arquivo)
     {
       if (arquivo != null)
       {
-<<<<<<< HEAD
-                arquivo.WriteLine($"{nome};{x:0.00000};{y:0.00000}");
-            }
-=======
-        arquivo.WriteLine($"{nome};{x:0.00000};{y:0.00000}");
+         arquivo.WriteLine($"{nome};{x:0.00000};{y:0.00000}");
       }
->>>>>>> 7f4fbe3a4feb140533a1c4d1b590c263c7ccca11
     }
     public int CompareTo(Cidade outra)  // <0, ==0, >0
     {

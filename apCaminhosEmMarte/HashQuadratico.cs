@@ -88,21 +88,12 @@ public class HashQuadratico<T> : IHashing<T> where T : IComparable<T>, IRegistro
         // Percorre a tabela simulando os mesmos saltos quadráticos usados no método Incluiu
         for (int i = 0; i < tabelaDeHash.Length; i++)
         {
-<<<<<<< HEAD
             // Aplica o salto quadrático (i * i) para verificar as posições que foram mapeadas no Incluiu
             int pos = (indice + (i * i)) % tabelaDeHash.Length;
 
             // Se achar um espaço nulo que nunca foi excluído, o item não existe
             if (tabelaDeHash[pos] == null && !foiExcluido[pos])
                 return false;
-=======
-            int pos = (indice + (i * i)) % tabelaDeHash.Length;
-
-            if (tabelaDeHash[pos] == null && !FoiExcluido[pos])
-                 return false;
-
->>>>>>> 7f4fbe3a4feb140533a1c4d1b590c263c7ccca11
-
             // Se o espaço estiver ocupado e a chave for igual à procurada, o item foi localizado
             if (tabelaDeHash[pos] != null && tabelaDeHash[pos].Chave.Equals(item.Chave))
             {
@@ -110,12 +101,8 @@ public class HashQuadratico<T> : IHashing<T> where T : IComparable<T>, IRegistro
                 return true;  // Retorna sucesso na busca
             }
         }
-<<<<<<< HEAD
-        onde = -1;
+
         return false; // Percorreu todos os saltos possíveis e não encontrou
-=======
-        return false;
->>>>>>> 7f4fbe3a4feb140533a1c4d1b590c263c7ccca11
     }
 
     // Remove um elemento do sistema com base no seu valor
