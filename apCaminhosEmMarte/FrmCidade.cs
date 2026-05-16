@@ -43,11 +43,17 @@ namespace apCaminhosEmMarte
                 while (!asCidades.EndOfStream)
                 {
                     // Lemos uma cidade do arquivo e tentamos incluí-la na tabela de hash
-                    Cidade umaCidade = new Cidade().LerRegistro(asCidades);
+                    var umaCidade = new Cidade().LerRegistro(asCidades);
 
                     // Se a cidade foi lida corretamente, adicionamos na tabela de hash
-                    if (umaCidade != null)
-                        tabelaDeCidades.Incluiu(umaCidade);
+                    if (umaCidade != null && !string.IsNullOrEmpty(umaCidade.Chave))
+                    {
+                        if (!tabelaDeCidades.Incluiu(umaCidade))
+                        {
+                            // Caso a inclusão falhe, exibimos uma mensagem de erro
+                            MessageBox.Show($"Erro ao incluir a cidade: {umaCidade.Chave}");
+                        }
+                    }
 
                 }
 
@@ -195,23 +201,16 @@ namespace apCaminhosEmMarte
         // Evento acionado ao fechar o programa
         private void FrmCaminhos_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Verifica se a tabela de cidades foi carregada
-            if (tabelaDeCidades != null)
+            if (tabelaDeCidades != null && tabelaDeCidades.Conteudo().Count > 0)
             {
-                // Cria um arquivo para salvar os dados das cidades
-                var salvarArquivo = new StreamWriter(dlgAbrir.FileName);
-
-                // Obtém a lista de cidades da tabela de hash
-                var listaCidades = tabelaDeCidades.Conteudo();
-
-                // Percorre todas as cidades e escreve seus dados no arquivo
-                foreach (var cidade in listaCidades)
+                using (var salvarArquivo = new StreamWriter(dlgAbrir.FileName))
                 {
-                    cidade.EscreverRegistro(salvarArquivo);
+                    var listaCidades = tabelaDeCidades.Conteudo();
+                    foreach (var cidade in listaCidades)
+                    {
+                        cidade.EscreverRegistro(salvarArquivo);
+                    }
                 }
-
-                // Fecha o arquivo após salvar os dados
-                salvarArquivo.Close();
             }
         }
     }

@@ -5,7 +5,7 @@ public class HashQuadratico<T> : IHashing<T> where T : IComparable<T>, IRegistro
 {
 
     private T[] tabelaDeHash;
-    private int tamanhoPadrao = 21;
+    private int tamanhoPadrao = 10007;
     private int quantidade;
     private bool[] FoiExcluido;
 
@@ -60,21 +60,18 @@ public class HashQuadratico<T> : IHashing<T> where T : IComparable<T>, IRegistro
 
         for (int i = 0; i < tabelaDeHash.Length; i++)
         {
-            int pos = (indice + (i * i)) % tamanhoPadrao;
+            int pos = (indice + (i * i)) % tabelaDeHash.Length;
 
             if (tabelaDeHash[pos] == null && !FoiExcluido[pos])
                  return false;
-            
+
 
             if (tabelaDeHash[pos] != null && tabelaDeHash[pos].Chave.Equals(item.Chave))
             {
                 onde = pos;
                 return true;
             }
-  
-            
         }
-        onde = -1;
         return false;
     }
 

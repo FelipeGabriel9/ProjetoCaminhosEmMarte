@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class HashDuplo<T> : IHashing<T> where T : IRegistro<T>, new()
 {
-    private const int tamanhoPadrao = 21; // Número primo
+    private const int tamanhoPadrao = 10007; // Número primo
     private T[] tabelaDeHash; // Vetor para armazenar os dados
     private bool[] foiExcluido;
 

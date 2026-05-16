@@ -30,8 +30,8 @@ namespace apCaminhosEmMarte
         nome = dados[0];  // (inicio, quantos)
         x = double.Parse(dados[1]);
         y = double.Parse(dados[2]);
-        return this;
-      }
+                return new Cidade(nome, x, y);
+            }
       return default(Cidade);  // para arquivo não aberto
     }
     public void EscreverRegistro(StreamWriter arquivo)
